@@ -1,11 +1,11 @@
 package com.mrgems.service;
 
 import com.mrgems.dto.AdminLoginResponse;
+import com.mrgems.dto.AdminProfileResponse;
 import com.mrgems.model.Admin;
 import com.mrgems.repository.AdminRepository;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
@@ -61,6 +61,17 @@ public class AdminService {
         response.setEmail(admin.getEmail());
         response.setAccessToken(token);
         response.setTokenType("Bearer");
+        return response;
+    }
+
+    public AdminProfileResponse getAdminProfile(String email){
+        Admin admin = findAdminByEmail(email);
+        AdminProfileResponse response = new AdminProfileResponse();
+        response.setAdminId(admin.getId());
+        response.setAdminName(admin.getAdminName());
+        response.setEmail(admin.getEmail());
+        response.setActive(admin.isActive());
+        response.setCreatedAt(admin.getCreatedAt());
         return response;
     }
 }
