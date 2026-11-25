@@ -2,8 +2,6 @@ package com.mrgems.controller;
 
 import com.mrgems.dto.AdminLoginRequest;
 import com.mrgems.dto.AdminLoginResponse;
-import com.mrgems.model.Admin;
-import com.mrgems.repository.AdminRepository;
 import com.mrgems.service.AdminService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +19,11 @@ public class AdminController {
     @PostMapping("/login")
     public ResponseEntity<AdminLoginResponse>
     adminLoginRequest(@Valid @RequestBody AdminLoginRequest request){
-
+        AdminLoginResponse response = adminService.loginAdmin(
+                request.getEmail(),
+                request.getPassword()
+        );
+        return ResponseEntity.ok(response);
     }
 
 }
