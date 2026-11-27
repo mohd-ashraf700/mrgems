@@ -1,6 +1,7 @@
 package com.mrgems.model;
 
 import jakarta.persistence.*;
+import lombok.CustomLog;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,6 +25,14 @@ public class PasswordResetOtp {
     private LocalDateTime expiresAt;
     @Column(nullable = false)
     private Integer attempts = 0;
+    @Column(nullable = false)
+    private boolean verified = false;
+    @Column
+    private String resetTokenHash;
+
+    @Column
+    private LocalDateTime resetTokenExpiresAt;
+
     @Column(nullable = false)
     private boolean used = false;
     @Column(nullable = false, updatable = false)
